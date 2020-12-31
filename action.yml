@@ -1,0 +1,9 @@
+name: "action-package-audit"
+author: "smockle"
+description: "Requires 2FA for publishing an npm org’s packages."
+runs:
+  using: "node14"
+  image: "index.mjs"
+branding:
+  icon: "shield"
+  color: "blue"
