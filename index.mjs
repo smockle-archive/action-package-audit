@@ -31,6 +31,6 @@ const packages = Object.keys(JSON.parse(stdout.trim()));
 
 // Require 2FA for publishing packages
 // Docs: https://docs.npmjs.com/requiring-2fa-for-package-publishing-and-settings-modification
-for (const pkg in packages.filter((pkg) => !exceptions.includes(pkg))) {
+for (const pkg of packages.filter((pkg) => !exceptions.includes(pkg))) {
   await run(`npm access 2fa-required ${pkg}`);
 }
