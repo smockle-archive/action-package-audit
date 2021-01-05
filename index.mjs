@@ -2,7 +2,7 @@
 
 import { run } from "./run.mjs";
 
-/** An automation token to authenticate with the npm registry. */
+/** A read-only token to authenticate with the npm registry. */
 const token = process.env.NPM_TOKEN;
 if (!token) {
   console.error("Missing environment variable: NPM_TOKEN");

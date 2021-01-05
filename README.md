@@ -6,7 +6,7 @@ Requires 2FA for publishing an npm org’s packages.
 
 ### `NPM_TOKEN`
 
-**Required** A [token](https://docs.npmjs.com/about-access-tokens) to authenticate with the npm registry. An automtion token should be provided, not a read-only or publish token.
+**Required** A [token](https://docs.npmjs.com/about-access-tokens) to authenticate with the npm registry. An read-only token should be provided, not an automation or publish token.
 
 ### `PACKAGE_AUDIT_ORG`
 
