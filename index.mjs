@@ -1,6 +1,6 @@
 #!/usr/bin/env node --es-module-specifier-resolution=node
 
-import { run } from "./run.js";
+import { run } from "./run.mjs";
 
 /** An automation token to authenticate with the npm registry. */
 const token = process.env.NPM_TOKEN;
