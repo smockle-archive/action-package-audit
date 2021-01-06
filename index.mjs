@@ -8,7 +8,7 @@ if (!token) {
   console.error("Missing environment variable: NPM_TOKEN");
   process.exit(1);
 }
-await run(`echo "//registry.npmjs.org/:_authToken=${token}" > "${process.env.HOME}/.npmrc"`)
+await run(`echo "//registry.npmjs.org/:_authToken=${token}" > "${process.env.HOME}/.npmrc"`);
 
 /** The npm org to audit */
 const org = process.env.PACKAGE_AUDIT_ORG;
@@ -26,11 +26,14 @@ const exceptions = (process.env.PACKAGE_AUDIT_EXCEPTIONS ?? "")
 // Retrieve org packages
 const { stdout } = await run(`npm access ls-packages ${org}`);
 
-// Extract a list of org packages from command output
-const packages = Object.keys(JSON.parse(stdout.trim()));
+// Extract a list of org packages from command output, then
+// remove exceptions and unsupported packages.
+const packages = Object.keys(JSON.parse(stdout.trim()))
+  .filter((pkg) => !exceptions.includes(pkg))
+  .filter((pkg) => !pkg.startsWith("@"));
 
 // Require 2FA for publishing packages
 // Docs: https://docs.npmjs.com/requiring-2fa-for-package-publishing-and-settings-modification
-for (const pkg of packages.filter((pkg) => !exceptions.includes(pkg))) {
+for (const pkg of packages) {
   await run(`npm access 2fa-required ${pkg}`);
 }
