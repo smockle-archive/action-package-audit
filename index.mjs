@@ -27,10 +27,9 @@ const exceptions = (process.env.PACKAGE_AUDIT_EXCEPTIONS ?? "")
 const { stdout } = await run(`npm access ls-packages ${org}`);
 
 // Extract a list of org packages from command output, then
-// remove exceptions and unsupported packages.
+// remove exceptions.
 const packages = Object.keys(JSON.parse(stdout.trim()))
-  .filter((pkg) => !exceptions.includes(pkg))
-  .filter((pkg) => !pkg.startsWith("@"));
+  .filter((pkg) => !exceptions.includes(pkg));
 
 // Require 2FA for publishing packages
 // Docs: https://docs.npmjs.com/requiring-2fa-for-package-publishing-and-settings-modification
